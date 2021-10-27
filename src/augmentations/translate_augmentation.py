@@ -3,14 +3,16 @@ import random
 import yaml
 import json
 import requests
-
+import os
 
 class TranslateAugmentation(BaseAugmentation):
     """ Аугментация, которая совершает перевод на английский язык и обратно """
     def __init__(self, probability:float=0.5, lang:str="en"):
         super().__init__(probability)
         self.lang = lang
-        with open("config/translator.yml", "r") as f:
+        package_path = Path(os.path.dirname(os.path.abspath(__file__)))
+
+        with open(package_path/"config"/"translator.yaml", "r") as f:
             config = yaml.load(f, Loader=yaml.FullLoader)
         self.config = config
 
