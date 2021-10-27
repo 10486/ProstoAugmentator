@@ -12,7 +12,7 @@ class TranslateAugmentation(BaseAugmentation):
     def __init__(self, probability:float=0.5, lang:str="en"):
         super().__init__(probability)
         self.lang = lang
-        package_path = Path(os.path.dirname(os.path.abspath(__file__)))
+        package_path = Path(os.path.dirname(os.path.abspath(__file__))).parent.parent
 
         with open(package_path/"config"/"translator.yaml", "r") as f:
             config = yaml.load(f, Loader=yaml.FullLoader)
