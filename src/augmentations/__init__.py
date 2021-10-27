@@ -1,0 +1,5 @@
+from .change_chars_augmentation import ChangeCharsAugmentation
+from .delete_char_augmentation import DeleteChatAugmentation
+from .misprint_augmentaion import MisprintAugmentation
+from .translate_augmentation import TranslateAugmentation
+from .synonymous_word_augmentation import SynonymousWordAugmentation
