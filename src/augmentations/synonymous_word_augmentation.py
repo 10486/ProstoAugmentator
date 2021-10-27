@@ -3,13 +3,15 @@ import torch
 from navec import Navec
 import numpy as np
 import random
+import os
 
 
 class SynonymousWordAugmentation(BaseAugmentation):
     """ Аугментация, которая заменяет слово на похожее """
     def __init__(self, probability:float=0.5):
         self.probability = probability
-        path = './data/navec_hudlit_v1_12B_500K_300d_100q.tar'
+        package_path = Path(os.path.dirname(os.path.abspath(__file__))).parent.parent
+        path = package_path/'data'/'navec_hudlit_v1_12B_500K_300d_100q.tar'
         navec = Navec.load(path)
         self.vocab = navec.vocab
         self.embeddings = torch.Tensor(np.array([navec.pq[x] for x in range(len(navec.pq.indexes))]))
