@@ -4,6 +4,8 @@ import yaml
 import json
 import requests
 import os
+from pathlib import Path
+
 
 class TranslateAugmentation(BaseAugmentation):
     """ Аугментация, которая совершает перевод на английский язык и обратно """
