@@ -1,7 +1,8 @@
 from src.augmentations.base_augmnentation import BaseAugmentation
 import json
 import random
-
+import os
+from pathlib import Path
 
 
 class MisprintAugmentation(BaseAugmentation):
@@ -9,7 +10,9 @@ class MisprintAugmentation(BaseAugmentation):
 
     def __init__(self,probability:float=0.5):
         super().__init__(probability)
-        with open('./data/marks.json', 'r', encoding='utf-8') as marks:
+        package_path = Path(os.path.dirname(os.path.abspath(__file__))).parent.parent
+        path = package_path/'data'/'marks.json'
+        with open(path, 'r', encoding='utf-8') as marks:
             self._marks = json.load(marks)
 
     def __call__(self, text: str) -> str:
