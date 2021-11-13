@@ -22,11 +22,14 @@ class SynonymousWordAugmentation(BaseAugmentation):
         if random.random() < self.probability:
             words = text.split()
             idx_word = random.choice(range(len(words)))
-            vocab_idx = self.vocab[words[idx_word]]
-            if vocab_idx is not None:
-                similar_words = self.get_similar_words(vocab_idx)
-                words[idx_word] = random.choice(similar_words)
-                return " ".join(words)
+            try:
+                vocab_idx = self.vocab[words[idx_word]]
+                if vocab_idx is not None:
+                    similar_words = self.get_similar_words(vocab_idx)
+                    words[idx_word] = random.choice(similar_words)
+                    return " ".join(words)
+            except KeyError:
+                return text
         return text
 
     def get_similar_words(self, idx):
